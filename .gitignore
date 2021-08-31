@@ -1,4 +1,6 @@
+.idea
+out
 MoreOrLess.iml
-/target
+target
 pom.xml
-/.idea
+
