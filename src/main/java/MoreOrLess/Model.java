@@ -4,46 +4,53 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Model {
-
-    private int minLimit;
     private int maxLimit;
-
-    private int secretValue;
-
-    private List<Integer> history = new ArrayList<Integer>();
-
-    public void setSecretValue(){
-        secretValue = (int)Math.ceil(Math.random()* (maxLimit - minLimit - 1) + minLimit);
-    }
-
-    public boolean checkValue (int value){
-        history.add(value);
-        if (value == secretValue){
-            return false;
-        } else if (value > secretValue){
-            maxLimit = value;
-        } else {
-            minLimit = value;
-        }
-        return true;
-    }
-
-    public void setLimits(int minLimit, int maxLimit){
-        this.minLimit = minLimit;
+    public void setMaxLimit(int maxLimit) {
         this.maxLimit = maxLimit;
-    }
-
-    public int getSecretValue() {
-        return secretValue;
-    }
-    public int getMinLimit() {
-        return minLimit;
     }
     public int getMaxLimit() {
         return maxLimit;
     }
-    public List<Integer> getHistory() {
-        return history;
+
+    private int minLimit;
+    public int getMinLimit() {
+        return minLimit;
     }
 
+    public void setMinLimit(int minLimit) {
+        this.minLimit = minLimit;
+    }
+
+    private int secretNum;
+
+    private List<Integer> attempts = new ArrayList<>();
+    public List<Integer> getAttempts() {
+        return attempts;
+    }
+
+    public int rand(){
+        return  (int)Math.ceil(Math.random()*(maxLimit - minLimit - 1) + minLimit);
+    }
+
+    public void setSecretNum(){
+        this.secretNum=rand();
+    }
+
+    public int getSecretNum(){
+        return secretNum;
+    }
+
+    public boolean check(int val){
+        attempts.add(val);
+        if(val==secretNum){
+            return false;
+        }
+        if(val>secretNum){
+            maxLimit=val;
+        }
+        else{
+            minLimit=val;
+        }
+        return true;
+    }
 }

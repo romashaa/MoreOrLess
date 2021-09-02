@@ -9,7 +9,7 @@ public class View {
     public static final String INPUT_INT_DATA = "Input INT value ";
     public static final String WRONG_INPUT_INT_DATA = "Wrong input! Repeat please! ";
     public static final String CONGRATULATION = "CONGRATULATION! You WIN! Secret value = ";
-    public static final String HISTORY = "Your attempts = ";
+    public static final String ATTEMPTS = "Your attempts = ";
 
     // Utilities methods
     public void printMessage (String message){

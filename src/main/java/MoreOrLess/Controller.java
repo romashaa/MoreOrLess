@@ -3,9 +3,8 @@ package MoreOrLess;
 import java.util.Scanner;
 
 public class Controller {
-    int PRIMARY_MIN_LIMIT = 0;
-    int PRIMARY_MAX_LIMIT = 100;
-
+    private final int PRIMARY_MIN_LIMIT=0;
+    private final int PRIMARY_MAX_LIMIT=100;
     private Model model;
     private View view;
 
@@ -13,22 +12,16 @@ public class Controller {
         this.model = model;
         this.view = view;
     }
-
     public void processUser(){
         Scanner sc = new Scanner(System.in);
-
-        model.setLimits(PRIMARY_MIN_LIMIT, PRIMARY_MAX_LIMIT);
-
-        model.setSecretValue();
-        System.out.println(model.getSecretValue());
-
-        while (model.checkValue(inputIntValueWithScanner(sc)));
-
-        view.printMessage(View.CONGRATULATION + model.getSecretValue());
-        view.printMessage(View.HISTORY + String.valueOf(model.getHistory()));
+        model.setMaxLimit(PRIMARY_MAX_LIMIT);
+        model.setMinLimit(PRIMARY_MIN_LIMIT);
+        model.setSecretNum();
+        while(model.check(InputValueWithScanner(sc)));
+        view.printMessage(View.CONGRATULATION + model.getSecretNum());
+        view.printMessage(View.ATTEMPTS + String.valueOf(model.getAttempts()));
     }
-
-    private int inputIntValueWithScanner(Scanner sc) {
+    private int InputValueWithScanner(Scanner sc){
         int res = 0;
         view.printMessage(getInputIntMessage());
         while (true) {
@@ -36,7 +29,6 @@ public class Controller {
                 view.printMessage(View.WRONG_INPUT_INT_DATA + getInputIntMessage());
                 sc.next();
             }
-            // check value into diapason
             if ((res = sc.nextInt()) <= model.getMinLimit() ||
                     res >= model.getMaxLimit()) {
                 view.printMessage(View.WRONG_INPUT_INT_DATA + getInputIntMessage());
@@ -45,11 +37,13 @@ public class Controller {
             break;
         }
         return res;
-    }
 
+    }
     private String getInputIntMessage() {
         return
-                View.INPUT_INT_DATA+ "from "+ model.getMinLimit() + " to "+ model.getMaxLimit();
+                View.INPUT_INT_DATA + " from "+
+               model.getMinLimit()+" to "+ model.getMaxLimit();
     }
+
 }
 
